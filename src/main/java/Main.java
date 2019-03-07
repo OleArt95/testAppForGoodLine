@@ -35,6 +35,7 @@ public class Main {
 
         //задаем кастомный размер окна браузера
         //chromeDriver.manage().window().setSize(new Dimension(500, 500));
+
         //перезагрузка окна браузера
         //chromeDriver.navigate().refresh();
 
@@ -42,7 +43,8 @@ public class Main {
         //chromeDriver.quit();
 
         //Получаем и выводим на консоль заголовок сайта
-       System.out.println("Заголовок сайта: " + chromeDriver.getTitle());
+        System.out.println("Заголовок сайта: " + chromeDriver.getTitle());
+
         //получаем и выводим на консоль адрес сайта
         System.out.println("Url сайта: " + chromeDriver.getCurrentUrl());
 
@@ -50,23 +52,27 @@ public class Main {
         WebElement linkDescriptionFromNav = chromeDriver.findElement(By.linkText("ОПИСАНИЕ"));
         System.out.println("Текст элемента: " + linkDescriptionFromNav.getText());
 
+        //ищем текст элемента по имени класса
         WebElement linkDescriptionFromNavByClassName = chromeDriver.findElement(By.className("menu__link"));
         System.out.println("Текст элемента по имени класса: " + linkDescriptionFromNavByClassName.getText());
 
 
  //     body > div.header > div > div > nav > ul > li:nth-child(1) > a
+        //ищем текст элемента по css-селектору через инспектор
         WebElement linkDescriptionFromNavByCssSelectorWithInspector = chromeDriver.findElement(By.cssSelector("body > div.header > div > div > nav > ul > li:nth-child(1) > a"));
         System.out.println("Текст элемента по css-селектору, полученному через инспектор: " + linkDescriptionFromNavByCssSelectorWithInspector.getText());
 
+        //поиск текста элемента по своему css-селктору
         WebElement linkDescriptionFromNavByCssSelector = chromeDriver.findElement(By.cssSelector("[href=\"#description\"]"));
         System.out.println("Текст элемента по css-селектору, составленному самостоятельно: " + linkDescriptionFromNavByCssSelector.getText());
 
+        //поиск текста элемента по xpath-селектору, полученному через инспектор
         WebElement linkDescriptionFromNavByXpathWithInspector = chromeDriver.findElement(By.xpath("/html/body/div[1]/div/div/nav/ul/li[1]/a"));
         System.out.println("Текст элемента по xpath-селектору, полученному через инспектор: " + linkDescriptionFromNavByXpathWithInspector.getText());
 
+        //поиск текста элемента по xpath-селектору, полученному самостоятельно
         WebElement linkDescriptionFromNavByXpath = chromeDriver.findElement(By.xpath("//a[@href=\"#description\"]"));
         System.out.println("Текст элемента по xpath-селектору, полученному самостоятельно: " + linkDescriptionFromNavByXpath.getText());
-
     //
     }
 }
