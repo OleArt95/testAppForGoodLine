@@ -16,6 +16,7 @@ public class Main {
         chromeDriver.get(URL_FOR_DIGITAL_CITY);
         clickOnIconCityDelivery();
         clickOnLinkKnowMoreCityDelivery();
+        clickOnLinkDigitalCityInfoBlockCityDelivery();
 
     }
     private static void clickOnIconCityDelivery() {
@@ -26,5 +27,15 @@ public class Main {
     private static void clickOnLinkKnowMoreCityDelivery() {
         WebElement linkContentMore = chromeDriver.findElement(By.cssSelector("[href=\"#food\"]"));
                 linkContentMore.click();
+    }
+    private static void clickOnLinkDigitalCityInfoBlockCityDelivery() {
+        WebElement linkContentMoreAboutExternalSite = chromeDriver.findElement(By.cssSelector("[href=\"https://dostavka.a42.ru/?utm_source=digitalcity\"]"));
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        linkContentMoreAboutExternalSite.click();
+
     }
 }
