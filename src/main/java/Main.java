@@ -4,33 +4,31 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Main {
-    /**
-     * Объявление 3 констант для обозначения драйвера, сайта "Цифровой город", относительного пути до драйвера
-     **/
+    //Объявление переменной для веб-драйвера
     private static WebDriver chromeDriver;
+
+    //Объявление константы для драйвера
     private static final String WEBDRIVER_CHROME_DRIVER = "webdriver.chrome.driver";
+
+    //Объявление константы  для сайта "Цифровой город"
     private static final String URL_FOR_DIGITAL_CITY = "http://цг.рф";
+
+    //Объявление константы, которая обозначает относительный путь до chrome драйвера
     private static final String PATH_TO_CHROME_DRIVER = ".\\selen\\chromedriver.exe";
 
-    /**
-     * Вызов 3 методов для нажатия 3 кнопок ("Городская доставка","Узнать больше" и "Узнать больше" в разделе
-     * "Городская доставка") на сайте "цг.рф"
-     **/
     public static void main(String[] args) {
-
-
         System.setProperty(WEBDRIVER_CHROME_DRIVER, PATH_TO_CHROME_DRIVER);
+
         chromeDriver = new ChromeDriver();
         chromeDriver.get(URL_FOR_DIGITAL_CITY);
+
         clickOnIconCityDelivery();
         clickOnLinkKnowMoreCityDelivery();
         clickOnLinkDigitalCityInfoBlockCityDelivery();
-
     }
 
     /**
-     * Метод для нажатия на иконку "Городская доставка" на сайте "Цифровой город". Иконка найдена самостоятельно с
-     * помощью CSS-селектора.
+     * Метод для нажатия на иконку "Городская доставка" на сайте "Цифровой город".
      */
     private static void clickOnIconCityDelivery() {
         WebElement iconCityDelivery = chromeDriver.findElement(By.cssSelector("[data-id=\"3\"] button.switcher__button"));
@@ -38,16 +36,15 @@ public class Main {
     }
 
     /**
-     * Метод для нажатия на кнопку "Узнать больше" на сайте "Цифровой город". Кнопка найдена с помощью CSS-селктора
+     * Метод для нажатия на кнопку "Узнать больше" на сайте "Цифровой город".
      */
     private static void clickOnLinkKnowMoreCityDelivery() {
         WebElement linkContentMore = chromeDriver.findElement(By.cssSelector("[href=\"#food\"]"));
-                linkContentMore.click();
+        linkContentMore.click();
     }
 
     /**
-     * Метод для нажатия на кнопку "Узнать больше" на сайте "Цифровой город" в разделе "Городская доставка". Метод
-     * релизован при помощи создания временной задержки для основного потока Thread.sleep()
+     * Метод для нажатия на кнопку "Узнать больше" на сайте "Цифровой город" в разделе "Городская доставка".
      */
     private static void clickOnLinkDigitalCityInfoBlockCityDelivery() {
         WebElement linkContentMoreAboutExternalSite = chromeDriver.findElement(By.cssSelector("[href=\"https://dostavka.a42.ru/?utm_source=digitalcity\"]"));
@@ -57,6 +54,5 @@ public class Main {
             e.printStackTrace();
         }
         linkContentMoreAboutExternalSite.click();
-
     }
 }
