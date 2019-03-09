@@ -11,8 +11,10 @@ public class Main {
     //Объявление переменной для веб-драйвера
     private static WebDriver chromeDriver;
 
+    //Объявление переменной для драйвера ожидания
     private static WebDriverWait waitDriver;
 
+    //Объявление константы для вкладки "Городская доставка"
     private static final int TAB_CITY_DELIVERY = 1;
 
     //Объявление константы для драйвера
@@ -30,12 +32,14 @@ public class Main {
         chromeDriver = new ChromeDriver();
         chromeDriver.get(URL_FOR_DIGITAL_CITY);
 
+        //Объявление переменной для драйвера ожидания
         waitDriver = new WebDriverWait(chromeDriver, 60);
 
         clickOnIconCityDelivery();
         clickOnLinkKnowMoreCityDelivery();
         clickOnLinkDigitalCityInfoBlockCityDelivery();
         clickOnCloseButtonOnModalWindowCityDelivery();
+        clickOnButtonLentaCatalogCityDelivery();
     }
 
     /**
@@ -67,6 +71,9 @@ public class Main {
         linkContentMoreAboutExternalSite.click();
     }
 
+    /**
+     * Метод для нажатия на кнопку закрытия на модальном окне на сайте "Городская доставка"
+     */
     private static void clickOnCloseButtonOnModalWindowCityDelivery() {
         long timeToWait = 5000L;
 
@@ -79,16 +86,32 @@ public class Main {
         closeButtonOnModalWindow.click();
     }
 
+    private static void clickOnButtonLentaCatalogCityDelivery() {
+        WebElement buttonLentaCatalog = chromeDriver.findElement(By.cssSelector("[href=\"/catalog/2\"] div.button"));
+        buttonLentaCatalog.click();
+    }
+
+    /**
+     * Вспомогательный метод для переключения на вкладку "Городская доставка" в основном окне браузера
+     */
     private static void switchToTabCityDelivery(){
         ArrayList<String> tabs = new ArrayList<String>(chromeDriver.getWindowHandles());
         chromeDriver.switchTo().window(tabs.get(TAB_CITY_DELIVERY));
     }
 
+    /**
+     * Вспомогательный метод ожидания основного потока
+     * @param millisecondsOfWait временная задержка
+     */
     private static void sleepGeneralThread(long millisecondsOfWait){
         try {
             Thread.sleep(millisecondsOfWait);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        }
+        //[class="search-bar__input"]
+        //[class="search-bar__submit"]
     }
-}
+
