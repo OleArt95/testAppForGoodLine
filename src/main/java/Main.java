@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     //Объявление переменной для веб-драйвера
@@ -30,6 +31,7 @@ public class Main {
         System.setProperty(WEBDRIVER_CHROME_DRIVER, PATH_TO_CHROME_DRIVER);
 
         chromeDriver = new ChromeDriver();
+        chromeDriver.manage().window().maximize();
         chromeDriver.get(URL_FOR_DIGITAL_CITY);
 
         //Объявление переменной для драйвера ожидания
@@ -40,6 +42,10 @@ public class Main {
         clickOnLinkDigitalCityInfoBlockCityDelivery();
         clickOnCloseButtonOnModalWindowCityDelivery();
         clickOnButtonLentaCatalogCityDelivery();
+        setTextInSearchInputCityDelivery();
+        clickOnSearchButtonCityDelivery();
+        checkCountOfProductsCityDelivery();
+        checkExistenceOfButtonInCardCityDelivery();
     }
 
     /**
@@ -91,27 +97,62 @@ public class Main {
         buttonLentaCatalog.click();
     }
 
+    private static void setTextInSearchInputCityDelivery() {
+        String requestParameter = "пицца пепперони";
+        WebElement searchInputInNavigationBar = chromeDriver.findElement(By.cssSelector("[class=\"search-bar__input\"]"));
+        searchInputInNavigationBar.sendKeys(requestParameter);
+    }
+
+    private static void clickOnSearchButtonCityDelivery() {
+        WebElement searchButtonInNavigationBar = chromeDriver.findElement(By.cssSelector("[class=\"search-bar__submit\"]"));
+        searchButtonInNavigationBar.click();
+    }
+
+    private static void checkCountOfProductsCityDelivery() {
+        long millisecondsOfWait = 5000L;
+        int expectedProductCount = 1;
+
+        sleepGeneralThread(millisecondsOfWait);
+
+        List<WebElement> productCards = chromeDriver.findElements(By.cssSelector("div#catalog-content [class*=\"grid\"] [class*=\"card\"]"));
+
+        if (productCards.size() > expectedProductCount) {
+            System.out.println("Количество товаров на странице > " + expectedProductCount + "Товаров на странице: " + productCards.size());
+        } else {
+            System.out.println("Количество товаров на странице: " + productCards.size());
+        }
+    }
+
+    private static void checkExistenceOfButtonInCardCityDelivery() {
+        WebElement buttonInCard = chromeDriver.findElement(By.cssSelector("[class*=\"controls\"] button.button_size_xs"));
+
+        if (buttonInCard != null) {
+            System.out.println("У товара имеется кнопка \"в корзину\"");
+        } else {
+            System.out.println("У товара отсутствует \"в корзину\"");
+        }
+    }
+
     /**
      * Вспомогательный метод для переключения на вкладку "Городская доставка" в основном окне браузера
      */
-    private static void switchToTabCityDelivery(){
+    private static void switchToTabCityDelivery() {
         ArrayList<String> tabs = new ArrayList<String>(chromeDriver.getWindowHandles());
         chromeDriver.switchTo().window(tabs.get(TAB_CITY_DELIVERY));
     }
 
     /**
      * Вспомогательный метод ожидания основного потока
+     *
      * @param millisecondsOfWait временная задержка
      */
-    private static void sleepGeneralThread(long millisecondsOfWait){
+    private static void sleepGeneralThread(long millisecondsOfWait) {
         try {
             Thread.sleep(millisecondsOfWait);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        }
-        //[class="search-bar__input"]
-        //[class="search-bar__submit"]
     }
+}
 
