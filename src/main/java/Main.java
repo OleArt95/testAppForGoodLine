@@ -92,22 +92,34 @@ public class Main {
         closeButtonOnModalWindow.click();
     }
 
+    /**
+     * Метод для нажатия на кнопку "В каталог" в секции "Лента" на сайте "Городская доставка"
+     */
     private static void clickOnButtonLentaCatalogCityDelivery() {
         WebElement buttonLentaCatalog = chromeDriver.findElement(By.cssSelector("[href=\"/catalog/2\"] div.button"));
         buttonLentaCatalog.click();
     }
 
+    /**
+     * Метод для ввода текста запроса "пицца пепперони" в навигационном окне в поле поиска
+     */
     private static void setTextInSearchInputCityDelivery() {
         String requestParameter = "пицца пепперони";
         WebElement searchInputInNavigationBar = chromeDriver.findElement(By.cssSelector("[class=\"search-bar__input\"]"));
         searchInputInNavigationBar.sendKeys(requestParameter);
     }
 
+    /**
+     * Метод для нажатия на кнопку поиска в навигационном окне
+     */
     private static void clickOnSearchButtonCityDelivery() {
         WebElement searchButtonInNavigationBar = chromeDriver.findElement(By.cssSelector("[class=\"search-bar__submit\"]"));
         searchButtonInNavigationBar.click();
     }
 
+    /**
+     * Метод для проверки, что количество товаров на странице > 1
+     */
     private static void checkCountOfProductsCityDelivery() {
         long millisecondsOfWait = 5000L;
         int expectedProductCount = 1;
@@ -123,6 +135,9 @@ public class Main {
         }
     }
 
+    /**
+     * Метод для проверки наличия кнопки "в корзину"
+     */
     private static void checkExistenceOfButtonInCardCityDelivery() {
         WebElement buttonInCard = chromeDriver.findElement(By.cssSelector("[class*=\"controls\"] button.button_size_xs"));
 
